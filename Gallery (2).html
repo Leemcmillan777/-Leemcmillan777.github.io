@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gallery - Legros Landscape and Construction</title>
+    <link rel="stylesheet" type="text/css" href="styles/default.css">
+    <meta charset="utf-8">
+    <meta name="author" content="Lee-McMillan">
+
+    <style>
+        .image-container {
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+        }
+
+            .image-container img {
+                display: block;
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                transition: transform 0.3s;
+            }
+
+            .image-container:hover img {
+                transform: scale(1.1);
+            }
+    </style>
+
+    <script>
+        // JavaScript code goes here
+        var directory = "C:/Users/ASUS/Desktop/LegrosWeb/Photos/";
+        var allowedExtensions = ["jpg", "jpeg", "png", "gif"];
+
+        function getImages() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var files = JSON.parse(xhr.responseText);
+                        displayImages(files);
+                    } else {
+                        console.error('Error: ' + xhr.status);
+                    }
+                }
+            };
+
+            xhr.open('GET', 'getImages.php?directory=' + encodeURIComponent(directory), true);
+            xhr.send();
+        }
+
+        function displayImages(files) {
+            var container = document.getElementById('gallery');
+
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var extension = file.substr(file.lastIndexOf('.') + 1).toLowerCase();
+
+                if (allowedExtensions.includes(extension)) {
+                    var imageContainer = document.createElement('div');
+                    imageContainer.className = 'image-container';
+
+                    var image = document.createElement('img');
+                    image.src = directory + file;
+                    image.alt = file;
+
+                    imageContainer.appendChild(image);
+                    container.appendChild(imageContainer);
+                }
+            }
+        }
+
+        // Call the function to retrieve and display images
+        getImages();
+    </script>
+</head>
+
+<body>
+    <div class="menu">
+        <!-- Menu code goes here -->
+    </div>
+
+    <div class="container">
+        <!-- Container code goes here -->
+    </div>
+
+    <div id="gallery"></div>
+
+    <div class="footer">
+        <!-- Footer code goes here -->
+    </div>
+</body>
+</html>

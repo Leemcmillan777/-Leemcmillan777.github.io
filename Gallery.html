@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gallery - Legros Landscape and Construction</title>
+    <link rel="stylesheet" type="text/css" href="styles/default.css">
+    <meta charset="utf-8">
+    <meta name="author" content="Lee-McMillan">
+
+    <script>
+        // JavaScript code goes here
+        var images = [
+            "Photos/IMG-20200531-WA0006.jpg",
+            "Photos/IMG-20210227-WA0003.jpg",
+            "Photos/IMG-20211022-WA0010.jpg",
+            // Add more image filenames as needed
+        ];
+
+        var currentIndex = 0;
+        var imageElements = document.querySelectorAll(".image-container img");
+
+        function changeImage() {
+            imageElements[currentIndex].src = images[currentIndex];
+            currentIndex = (currentIndex + 1) % images.length;
+        }
+
+        // Change image every 5 seconds (adjust the duration as needed)
+        setInterval(changeImage, 5000);
+    </script>
+
+    <style>
+        .image-container {
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+        }
+
+            .image-container img {
+                display: block;
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                transition: transform 0.3s;
+            }
+
+            .image-container:hover img {
+                transform: scale(1.1);
+            }
+    </style>
+</head>
+
+<body>
+
+    <div class="menu">
+        <ul>
+            <li class="logo-link"><a href="../LegrosWeb/index.html"><div class="logo-icon"></div></a></li>
+            <li><a href="../LegrosWeb/index.html">Home</a></li>
+            <li class="menu-item"><a href="../LegrosWeb/ResidentialLandscaping.html">Residential</a></li>
+            <li class="menu-item"><a href="../LegrosWeb/NativeReveg.html">Revegetation</a></li>
+            <li><a href="../LegrosWeb/Gallery.html">Gallery</a></li>
+            <li><a href="../LegrosWeb/contact.html">Contact</a></li>
+            <li><a href="../LegrosWeb/About.html">About</a></li>
+        </ul>
+    </div>
+
+
+    <div class="container">
+        <div class="background-image"></div>
+        <div class="text-overlay">
+            <h1>Legros Landscape and Construction Ltd</h1>
+            <h1>Welcome to Legro Landscapes - Where Professionalism Meets Fun!</h1>
+            <p>At Legro Landscapes, we take great pride in the work we do. Our gallery showcases some of our most remarkable projects, highlighting the beauty and craftsmanship that goes into each landscape design.</p>
+            <p>Explore the gallery to get inspired and see the stunning transformations we've accomplished. From lush gardens to elegant outdoor living spaces, our gallery reflects the diverse range of landscapes we've created for our clients.</p>
+            <p>As you browse through the images, envision the possibilities for your own outdoor space. Our team of experts is here to bring your vision to life, working closely with you to design and construct a landscape that exceeds your expectations.</p>
+            <p>
+                Contact us today to discuss your project and let
+                us turn your dream landscape into a reality. Your perfect outdoor space awaits!
+            </p>
+        </div>
+    </div>
+
+    <?php
+    $directory = "C:/Users/ASUS/Desktop/LegrosWeb/Photos/";
+    $allowedExtensions = ["jpg", "jpeg", "png", "gif"];
+
+    // Read files from the directory
+    $files = scandir($directory);
+
+    foreach ($files as $file) {
+    $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+
+    // Check if the file extension is allowed
+    if (in_array($extension, $allowedExtensions)) {
+    echo '<div class="image-container">
+        ';
+        echo '<img src="' . $directory . $file . '" alt="' . $file . '">';
+        echo '
+    </div>';
+    }
+    }
+    ?>
+
+    <div class="gallery">
+        <div class="image-container">
+            <img src="Photos/IMG-20200531-WA0006.jpg" alt="Image 1">
+        </div>
+
+        <div class="image-container">
+            <img src="Photos/IMG-20210227-WA0003.jpg" alt="Image 2">
+        </div>
+
+        <div class="image-container">
+            <img src="Photos/IMG-20211022-WA0010.jpg" alt="Image 3">
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>
+            LAMwebsolutions<br>
+            <a href="mailto:leemcmillan@myop.ac.nz">lee.mcmillan@me.com</a>
+        </p>
+    </div>
+</body>
+</html>
